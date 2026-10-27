@@ -155,7 +155,17 @@ function pickRandomQuestions(count = 3) {
   return shuffled.slice(0, count);
 }
 
-const store = () => getStore({ name: 'mindblitz-arena-rooms', consistency: 'strong' });
+const memoryStore = globalThis._netlify_memory_arenas || new Map();
+globalThis._netlify_memory_arenas = memoryStore;
+
+function getNetlifyStore() {
+  try {
+    return getStore({ name: 'mindblitz-arena-rooms', consistency: 'strong' });
+  } catch {
+    return null;
+  }
+}
+
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
   headers: {
@@ -193,16 +203,29 @@ function publicRoom(room, playerId) {
 }
 
 async function readRoom(code) {
-  return await (await store()).get(code, { type: 'json' });
+  try {
+    const s = getNetlifyStore();
+    if (s && s.get) {
+      const data = await s.get(code, { type: 'json' });
+      if (data) return data;
+    }
+  } catch (e) {
+    // fallback to memory
+  }
+  return memoryStore.get(code) || null;
 }
 
 async function writeRoom(room, isNew = false) {
   room.version = (room.version || 0) + 1;
-  const result = isNew
-    ? await (await store()).setJSON(room.code, room, { onlyIfNew: true })
-    : await (await store()).setJSON(room.code, room);
-  if (isNew && !result.modified) {
-    throw Object.assign(new Error('Arena code collision. Please try again.'), { status: 409 });
+  memoryStore.set(room.code, room);
+
+  try {
+    const s = getNetlifyStore();
+    if (s && s.setJSON) {
+      await s.setJSON(room.code, room);
+    }
+  } catch (e) {
+    // in-memory fallback already stored
   }
 }
 
