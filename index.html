@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d16">
+  <meta name="description" content="MindBlitz — Fast-paced real-time multiplayer trivia battle for 2–8 players.">
+  <title>MindBlitz — Live Multiplayer Trivia Arena</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-cyan"></div>
+  <div class="ambient ambient-indigo"></div>
+  <div class="ambient ambient-amber"></div>
+
+  <header class="topbar">
+    <a id="brandLink" class="brand" href="#" aria-label="MindBlitz home">
+      <span class="brand-logo-wrap">
+        <svg class="brand-logo-svg" width="38" height="38" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoShield" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#06b6d4"/>
+              <stop offset="50%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+            <linearGradient id="logoBolt" x1="16" y1="10" x2="32" y2="38" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="45%" stop-color="#22d3ee"/>
+              <stop offset="100%" stop-color="#ffffff"/>
+            </linearGradient>
+            <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#06b6d4" flood-opacity="0.45"/>
+            </filter>
+          </defs>
+          <polygon points="24,3 43,13 43,35 24,45 5,35 5,13" fill="#0d1527" stroke="url(#logoShield)" stroke-width="2.5" filter="url(#logoGlow)"/>
+          <polygon points="24,8 39,16 39,32 24,40 9,32 9,16" stroke="rgba(99, 102, 241, 0.35)" stroke-width="1.2"/>
+          <path d="M26 10L14 26H23L21 38L34 22H24L26 10Z" fill="url(#logoBolt)"/>
+        </svg>
+      </span>
+      <span class="brand-title">MIND<span class="brand-accent">BLITZ</span></span>
+    </a>
+    <div class="topbar-actions">
+      <button id="soundToggleBtn" class="sound-pill" aria-label="Toggle Sound Effects">
+        <svg id="soundIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <span id="soundLabel">SFX ON</span>
+      </button>
+      <div class="live-pill">
+        <span class="live-dot"></span>
+        <span>REAL-TIME ARENA</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <!-- HOME / LANDING VIEW -->
+    <section id="homeView" class="hero view">
+      <div class="eyebrow">
+        <svg class="eyebrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
+        </svg>
+        <span>REAL-TIME MULTIPLAYER TRIVIA</span>
+      </div>
+      <h1>Think fast.<br><span class="gradient-text">Tap faster.</span> Win glory.</h1>
+      <p class="hero-copy">Challenge your friends in a lightning-speed trivia clash. Host a private battle room, lock your picks under pressure, and conquer the leaderboard.</p>
+
+      <div class="home-grid">
+        <article class="panel create-panel">
+          <div class="panel-icon cyan">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M2 12h20"/>
+            </svg>
+          </div>
+          <h2>Host a Showdown</h2>
+          <p>Spin up a room and share the 7-character battle code.</p>
+          <label for="hostName">Host Nickname</label>
+          <input id="hostName" maxlength="18" placeholder="e.g. Brainiac" autocomplete="nickname">
+          <button id="createBtn" class="btn btn-primary">
+            <span>Create Arena Room</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </button>
+        </article>
+
+        <article class="panel join-panel">
+          <div class="panel-icon indigo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="6" y1="12" x2="10" y2="12"></line>
+              <line x1="8" y1="10" x2="8" y2="14"></line>
+              <line x1="15" y1="13" x2="15.01" y2="13"></line>
+              <line x1="18" y1="11" x2="18.01" y2="11"></line>
+              <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+            </svg>
+          </div>
+          <h2>Join a Battle</h2>
+          <p>Have an invite code? Step straight into the action.</p>
+          <label for="joinName">Your Nickname</label>
+          <input id="joinName" maxlength="18" placeholder="e.g. SpeedDemon" autocomplete="nickname">
+          <label for="roomCode">Arena Code</label>
+          <input id="roomCode" class="code-input" maxlength="7" placeholder="e.g. BLTZ789" autocomplete="off">
+          <button id="joinBtn" class="btn btn-secondary">
+            <span>Enter Arena</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </article>
+      </div>
+
+      <div class="feature-row">
+        <span>
+          <svg class="feat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="14" r="8"></circle>
+            <line x1="12" y1="2" x2="12" y2="6"></line>
+            <line x1="12" y1="14" x2="15" y2="11"></line>
+          </svg>
+          Rapid-Fire Rounds
+        </span>
+        <span>
+          <svg class="feat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          2–8 Challengers
+        </span>
+        <span>
+          <svg class="feat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          Live Leaderboard
+        </span>
+        <span>
+          <svg class="feat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+          </svg>
+          Zero Install / Mobile-Ready
+        </span>
+      </div>
+
+      <div class="how">
+        <h3>HOW THE BATTLE WORKS</h3>
+        <div class="how-grid">
+          <div>
+            <b>01</b>
+            <strong>Open Lobby</strong>
+            <p>One player hosts a room and shares the unique 7-character arena code.</p>
+          </div>
+          <div>
+            <b>02</b>
+            <strong>Lock Choices</strong>
+            <p>Race against the clock. Fastest correct pick earns high-speed bonus points.</p>
+          </div>
+          <div>
+            <b>03</b>
+            <strong>Claim The Crown</strong>
+            <p>Survive 3 rounds of trivia intensity to dominate the final podium.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROOM / LOBBY VIEW -->
+    <section id="roomView" class="view hidden">
+      <div class="room-head">
+        <div>
+          <div class="eyebrow">ARENA LOBBY</div>
+          <h1 id="roomTitle">Arena Code</h1>
+          <p id="roomSubtitle">Assembling competitors. Prepare for launch.</p>
+        </div>
+        <div class="room-code-box">
+          <span>ARENA CODE</span>
+          <strong id="roomCodeDisplay">-------</strong>
+          <button id="copyCodeBtn" class="copy-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copy Code</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="room-layout">
+        <article class="panel players-panel">
+          <div class="section-head">
+            <h2>Challengers <span id="playerCount" class="count">1/8</span></h2>
+            <span class="muted small">2 players minimum</span>
+          </div>
+          <div id="playersList" class="players-list"></div>
+          <div class="host-tip" id="hostTip">✦ Share your arena code with friends. The host launches when everyone is ready.</div>
+          <button id="startBtn" class="btn btn-primary full">
+            <span>Launch Battle</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <button id="leaveBtn" class="text-btn">Exit Arena</button>
+        </article>
+
+        <aside class="panel rules-panel">
+          <div class="panel-icon cyan">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+          </div>
+          <h2>Battle Regulations</h2>
+          <ul>
+            <li>3 intense multiple-choice rounds.</li>
+            <li>Each correct answer earns <b>100 base points</b>.</li>
+            <li>First correct answer snags a <b>+50 speed bonus</b> (150 total).</li>
+            <li>Single submission per round — once locked, choices cannot be changed.</li>
+            <li>Host advances after all competitors lock their picks.</li>
+            <li>Top cumulative score captures the championship trophy!</li>
+          </ul>
+          <div class="rules-footer">PLAY SMART. REACT QUICK. CONQUER.</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ACTIVE GAME VIEW -->
+    <section id="gameView" class="view hidden">
+      <div class="game-top">
+        <button id="backLobbyBtn" class="text-btn">← Arena Lobby</button>
+        <div class="round-pill" id="roundPill">ROUND 1 / 3</div>
+        <div class="room-mini">ARENA <b id="miniCode">-------</b></div>
+      </div>
+
+      <div class="game-layout">
+        <article class="panel question-panel">
+          <div class="question-meta">
+            <span class="category-pill" id="categoryPill">TECH & INNOVATION</span>
+            <span id="answeredCount" class="muted small">0 / 2 answered</span>
+          </div>
+          <div class="progress-track">
+            <div id="progressBar" class="progress-fill"></div>
+          </div>
+          <div class="question-number" id="questionNumber">ROUND 01</div>
+          <h1 id="questionText">Question loading...</h1>
+          <div id="answersGrid" class="answers-grid"></div>
+          <div id="answerFeedback" class="feedback" aria-live="polite"></div>
+          <div class="question-actions">
+            <span id="roundHint" class="muted small">Choose one answer. Locks instantly!</span>
+            <button id="nextBtn" class="btn btn-primary hidden">
+              <span>Next Round</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </article>
+
+        <aside class="panel scoreboard">
+          <div class="section-head">
+            <h2>Leaderboard</h2>
+            <span class="live-label"><i></i> LIVE</span>
+          </div>
+          <div id="scoreList" class="score-list"></div>
+          <div class="score-note">
+            Correct Pick = 100 pts<br>
+            Lightning Bonus = +50 pts
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RESULTS / PODIUM VIEW -->
+    <section id="resultView" class="view hidden">
+      <div class="results-wrap">
+        <div class="trophy-container">
+          <svg class="trophy-svg" width="88" height="88" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="goldCup" x1="16" y1="8" x2="48" y2="44" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fef08a"/>
+                <stop offset="30%" stop-color="#fbbf24"/>
+                <stop offset="70%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#b45309"/>
+              </linearGradient>
+              <linearGradient id="goldShine" x1="22" y1="10" x2="30" y2="34" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65"/>
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="goldHandle" x1="6" y1="14" x2="20" y2="30" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fef08a"/>
+                <stop offset="50%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#b45309"/>
+              </linearGradient>
+              <linearGradient id="goldHandleR" x1="58" y1="14" x2="44" y2="30" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fef08a"/>
+                <stop offset="50%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#b45309"/>
+              </linearGradient>
+              <linearGradient id="baseGrad" x1="18" y1="48" x2="46" y2="58" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#334155"/>
+                <stop offset="60%" stop-color="#1e293b"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+              <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#f59e0b" flood-opacity="0.45"/>
+              </filter>
+            </defs>
+            <path d="M19 14H15C10.58 14 7 17.58 7 22C7 26.42 10.58 30 15 30H19" stroke="url(#goldHandle)" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M45 14H49C53.42 14 57 17.58 57 22C57 26.42 53.42 30 49 30H45" stroke="url(#goldHandleR)" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M18 10H46V24C46 32.84 39.73 40 32 40C24.27 40 18 32.84 18 24V10Z" fill="url(#goldCup)" filter="url(#goldGlow)"/>
+            <path d="M16 8C16 6.9 16.9 6 18 6H46C47.1 6 48 6.9 48 8C48 9.1 47.1 10 46 10H18C16.9 10 16 9.1 16 8Z" fill="#fef08a"/>
+            <path d="M21 12H27C27 22 25 32 23 34C21.8 30 21 21 21 12Z" fill="url(#goldShine)"/>
+            <path d="M32 18L33.8 21.6L37.8 22.2L34.9 25L35.6 29L32 27.1L28.4 29L29.1 25L26.2 22.2L30.2 21.6L32 18Z" fill="#ffffff" fill-opacity="0.95"/>
+            <path d="M28 40H36V46C36 47.1 35.1 48 34 48H30C28.9 48 28 47.1 28 46V40Z" fill="url(#goldCup)"/>
+            <rect x="26" y="44" width="12" height="3" rx="1.5" fill="#fef08a"/>
+            <path d="M21 48H43L46 56C46.5 57.2 45.6 58 44.4 58H19.6C18.4 58 17.5 57.2 18 56L21 48Z" fill="url(#baseGrad)" stroke="#475569" stroke-width="1.5"/>
+            <rect x="25" y="51" width="14" height="4" rx="1" fill="url(#goldCup)"/>
+          </svg>
+        </div>
+        <div class="eyebrow">MATCH COMPLETED</div>
+        <h1 id="winnerTitle">Champion of MindBlitz!</h1>
+        <p id="winnerSubtitle" class="hero-copy">Incredible battle, everyone.</p>
+
+        <article class="panel final-panel">
+          <div class="section-head">
+            <h2>Final Standings</h2>
+            <span class="muted small">3 rounds completed</span>
+          </div>
+          <div id="finalScores" class="final-scores"></div>
+        </article>
+
+        <div class="result-actions">
+          <button id="playAgainBtn" class="btn btn-primary">
+            <span>Battle Again</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          </button>
+          <button id="homeBtn" class="btn btn-secondary">Return to Home</button>
+        </div>
+        <p class="muted small">Want another clash? The host can kick off a new room.</p>
+      </div>
+    </section>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <footer>
+      <span>MINDBLITZ MULTIPLAYER ARENA © 2026</span>
+      <span>ENGINEERED FOR MULTIPLAYER BATTLES</span>
+    </footer>
+  </main>
+
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+  <script src="app.js" defer></script>
+</body>
+</html>

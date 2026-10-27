@@ -1,0 +1,29 @@
+{
+  "name": "mindblitz-multiplayer-arena",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MindBlitz — Real-time multiplayer trivia battle game for 2–8 players with instant rooms, speed bonus scoring, and Netlify Blobs support.",
+  "scripts": {
+    "start": "node server.mjs",
+    "build": "node scripts/build-check.mjs",
+    "test": "node scripts/build-check.mjs"
+  },
+  "keywords": [
+    "mindblitz",
+    "trivia-game",
+    "multiplayer",
+    "realtime-arena",
+    "web-audio-api",
+    "canvas-confetti",
+    "speed-scoring"
+  ],
+  "author": "Independent Student Developer",
+  "license": "MIT",
+  "dependencies": {
+    "@netlify/blobs": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

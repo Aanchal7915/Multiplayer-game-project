@@ -1,0 +1,35 @@
+MINDBLITZ — REAL-TIME MULTIPLAYER TRIVIA ARENA
+==============================================
+
+PROJECT OVERVIEW
+- High-intensity real-time multiplayer trivia arena for 2–8 concurrent competitors
+- Unique 7-character arena codes (e.g., BLTZ789), real-time lobby presence, and speed-bonus scoring
+- 21+ Curated GK trivia question bank with randomized round selection (fresh experience every game)
+- Web Audio API synthesized sound effects engine with live navbar SFX toggle
+- Full-screen celebratory canvas confetti burst on the champion podium
+- Ultra-modern dark obsidian aesthetic with cyber-cyan & electric indigo accents
+- 100% responsive layout optimized for mobile smartphones, tablets, and desktop displays
+- Zero external database required for local play (in-memory state engine)
+- Netlify Functions + Netlify Blobs support for zero-config serverless cloud deployment
+
+QUICK START ON WINDOWS (PORT 3001)
+1. Ensure Node.js (v20+) is installed.
+2. Double-click START-WINDOWS.bat (or run `npm start` in your terminal).
+3. The server starts at http://localhost:3001.
+4. Open the link in two browser tabs or windows to simulate 2 players:
+   - Tab 1: Enter your nickname, click "Create Arena Room". Copy the 7-character code (e.g., BLTZ789).
+   - Tab 2: Enter another nickname, paste the 7-character code, and click "Enter Arena".
+   - Host clicks "Launch Battle" once both players are in the lobby!
+
+LOCAL NETWORK PLAY (PLAY FROM YOUR PHONE)
+- Connect both your PC and mobile device to the same Wi-Fi network.
+- Run `ipconfig` in terminal to find your machine's IPv4 address (e.g. 10.3.23.129).
+- On your phone browser, open: http://YOUR-IP:3001 (e.g. http://10.3.23.129:3001).
+
+SCORING RULES & MECHANICS
+- Base Points: 100 points for every correct answer.
+- Lightning Bonus: +50 extra points (150 total) for the very first player to lock in the correct answer!
+- Immediate Lock-in: One submission per competitor per round. Choices lock instantly upon clicking.
+- Automated Reveal: Once all players submit, correct answers, explanations, and scores are revealed.
+- Final Victory Podium: Highest cumulative score across 3 rounds claims the gold trophy!
+
