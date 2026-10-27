@@ -363,16 +363,20 @@ async function handle(req, res) {
 
     try {
       const data = await readFile(full);
-      return respond(res, 200, data, types[path.extname(full)] || 'application/octet-stream');
+      return sendJsonResponse(res, 200, data, types[path.extname(full)] || 'application/octet-stream');
     } catch {
-      return fail(res, 'Resource not found.', 404);
+      return sendHttpError(res, 'Resource not found.', 404);
     }
   }
 
-  fail(res, 'Not found.', 404);
+  sendHttpError(res, 'Not found.', 404);
 }
+
+// Global safety aliases
+const fail = sendHttpError;
+const respond = sendJsonResponse;
 
 const port = Number(process.env.PORT || 3001);
 createServer((req, res) => {
-  handle(req, res).catch(() => fail(res, 'Unexpected server error.', 500));
+  handle(req, res).catch(() => sendHttpError(res, 'Unexpected server error.', 500));
 }).listen(port, '0.0.0.0', () => console.log(`MindBlitz Arena is running at http://localhost:${port}`));
