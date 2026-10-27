@@ -205,7 +205,10 @@ function sendJsonResponse(res, statusCode, data, contentType = 'application/json
   res.writeHead(statusCode, {
     'Content-Type': contentType,
     'Cache-Control': 'no-store',
-    'X-Content-Type-Options': 'nosniff'
+    'X-Content-Type-Options': 'nosniff',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type,Authorization'
   });
   res.end(contentType.startsWith('application/json') ? JSON.stringify(data) : data);
 }
@@ -216,6 +219,15 @@ function sendHttpError(res, errorMessage, statusCode = 400) {
 
 async function handle(req, res) {
   const url = new URL(req.url, 'http://localhost');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(200, {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type,Authorization'
+    });
+    return res.end();
+  }
 
   if (req.method === 'POST' && url.pathname === '/api/game') {
     let payload;

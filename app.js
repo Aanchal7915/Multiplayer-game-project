@@ -125,8 +125,11 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
+const BACKEND_BASE = window.BACKEND_URL || '';
+
 async function api(action, data = {}) {
-  const r = await fetch('/api/game', {
+  const endpoint = BACKEND_BASE ? `${BACKEND_BASE.replace(/\/+$/, '')}/api/game` : '/api/game';
+  const r = await fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action, ...data })
