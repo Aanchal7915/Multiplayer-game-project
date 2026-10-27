@@ -54,6 +54,61 @@
     </div>
   </header>
 
+  <!-- WELCOME TO MINDBLITZ INTRO OVERLAY -->
+  <div id="welcomeOverlay" class="welcome-overlay" role="dialog" aria-modal="true" aria-label="Welcome to MindBlitz">
+    <div class="welcome-backdrop"></div>
+    <div class="welcome-card">
+      <div class="welcome-glow"></div>
+      
+      <div class="welcome-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        <span>REAL-TIME TRIVIA ARENA</span>
+      </div>
+
+      <div class="welcome-logo-wrap">
+        <svg class="welcome-logo-svg" width="56" height="56" viewBox="0 0 48 48" fill="none">
+          <polygon points="24,3 43,13 43,35 24,45 5,35 5,13" fill="#0d1527" stroke="url(#logoShield)" stroke-width="2.5"/>
+          <polygon points="24,8 39,16 39,32 24,40 9,32 9,16" stroke="rgba(99, 102, 241, 0.35)" stroke-width="1.2"/>
+          <path d="M26 10L14 26H23L21 38L34 22H24L26 10Z" fill="url(#logoBolt)"/>
+        </svg>
+      </div>
+
+      <h1 class="welcome-title">Welcome to <span class="gradient-text">MindBlitz</span></h1>
+      <p class="welcome-desc">Step into the ultimate multiplayer trivia clash. Host a private battle, invite your friends, and race against the clock to conquer the leaderboard!</p>
+
+      <div class="welcome-features">
+        <div class="welcome-feat">
+          <span class="feat-bullet">⚡</span>
+          <span>7-Char Arenas</span>
+        </div>
+        <div class="welcome-feat">
+          <span class="feat-bullet">🧠</span>
+          <span>Rapid-Fire Trivia</span>
+        </div>
+        <div class="welcome-feat">
+          <span class="feat-bullet">🏆</span>
+          <span>Speed Bonus</span>
+        </div>
+      </div>
+
+      <div class="welcome-actions">
+        <button id="welcomeEnterBtn" class="btn btn-primary welcome-btn">
+          <span>Enter Arena</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="welcome-timer-bar">
+        <div id="welcomeProgress" class="welcome-progress"></div>
+      </div>
+    </div>
+  </div>
+
   <main class="shell">
     <!-- HOME / LANDING VIEW -->
     <section id="homeView" class="hero view">

@@ -479,3 +479,44 @@ $('playAgainBtn').addEventListener('click', () => { sfx.click(); leaveToHome(); 
 $('roomCode').addEventListener('keydown', e => { if (e.key === 'Enter') joinRoom(); });
 $('joinName').addEventListener('keydown', e => { if (e.key === 'Enter') joinRoom(); });
 $('hostName').addEventListener('keydown', e => { if (e.key === 'Enter') createRoom(); });
+
+// Welcome Overlay Controller
+function initWelcomeOverlay() {
+  const overlay = $('welcomeOverlay');
+  const btn = $('welcomeEnterBtn');
+  const progress = $('welcomeProgress');
+  if (!overlay) return;
+
+  setTimeout(() => {
+    if (progress) progress.style.width = '100%';
+  }, 100);
+
+  const dismiss = () => {
+    if (overlay.classList.contains('dismissed')) return;
+    overlay.classList.add('dismissed');
+    sfx.click();
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 450);
+  };
+
+  if (btn) btn.addEventListener('click', dismiss);
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay || e.target.classList.contains('welcome-backdrop')) {
+      dismiss();
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if ((e.key === 'Escape' || e.key === 'Enter') && !overlay.classList.contains('dismissed')) {
+      dismiss();
+    }
+  });
+
+  setTimeout(() => {
+    dismiss();
+  }, 4500);
+}
+
+initWelcomeOverlay();
+
