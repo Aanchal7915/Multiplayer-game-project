@@ -1584,13 +1584,18 @@ footer b {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   animation: welcomePulse 3s infinite ease-in-out;
 }
 
+.welcome-logo-svg {
+  width: 28px;
+  height: 28px;
+}
+
 @keyframes welcomePulse {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 14px rgba(6, 182, 212, 0.4)); }
-  50% { transform: scale(1.05); filter: drop-shadow(0 0 24px rgba(99, 102, 241, 0.6)); }
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.35)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 14px rgba(99, 102, 241, 0.45)); }
 }
 
 .welcome-title {
